@@ -1,10 +1,9 @@
 /**
  * SISTERHOOD EXPERIENCE INTERACTIVE ENGINE
- * Ultra-Professional Dusky Rose Quartz Atmosphere, Background Slider & Particle Engine
+ * Ultra-Professional Dusky Rose Quartz Atmosphere, 3D Tilt, Dynamic Covers & Particle Engine
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Verify STORY_CONFIG availability
   if (typeof STORY_CONFIG === "undefined") {
     console.error("STORY_CONFIG not loaded from content.js");
     return;
@@ -13,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const config = STORY_CONFIG;
 
   /* ==========================================================================
-     0. BACKGROUND PHOTO AUTO-SLIDER ENGINE
+     0. BACKGROUND PHOTO AUTO-SLIDER & COVER ENGINE
      ========================================================================== */
   const bgSliderTrack = document.getElementById("bg-slider-track");
   let currentSlideIndex = 0;
@@ -37,14 +36,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 6000);
   }
 
+  function setActiveBgSlide(idx) {
+    if (bgSlideElements[idx]) {
+      bgSlideElements[currentSlideIndex].classList.remove("active");
+      currentSlideIndex = idx;
+      bgSlideElements[currentSlideIndex].classList.add("active");
+    }
+  }
+
   /* ==========================================================================
-     1. MULTI-ATMOSPHERE DUSKY PINK CANVAS PARTICLE SYSTEM
+     1. DYNAMIC CANVAS PARTICLE & CURSOR SPARKLE SYSTEM
      ========================================================================== */
   const canvas = document.getElementById("particle-canvas");
   const ctx = canvas.getContext("2d");
   let particles = [];
   let burstParticles = [];
-  let currentAtmosphere = "good"; // 'good', 'difficult', 'reconnect'
+  let cursorSparkles = [];
+  let currentAtmosphere = "good";
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -63,19 +71,16 @@ document.addEventListener("DOMContentLoaded", () => {
       this.size = Math.random() * 2.8 + 0.6;
 
       if (currentAtmosphere === "difficult") {
-        // Falling dusky lavender particles
         this.speedY = Math.random() * 1.8 + 0.8;
         this.speedX = (Math.random() - 0.5) * 0.3;
         this.opacity = Math.random() * 0.45 + 0.15;
         this.color = "rgba(216, 180, 254, ";
       } else if (currentAtmosphere === "reconnect") {
-        // Warm rising champagne rose light
         this.speedY = -(Math.random() * 0.85 + 0.25);
         this.speedX = (Math.random() - 0.5) * 0.4;
         this.opacity = Math.random() * 0.8 + 0.25;
         this.color = Math.random() > 0.5 ? "rgba(247, 214, 200, " : "rgba(255, 133, 162, ";
       } else {
-        // Good phase: floating soft pink & rose gold sparkles
         this.speedY = -(Math.random() * 0.5 + 0.12);
         this.speedX = (Math.random() - 0.5) * 0.3;
         this.opacity = Math.random() * 0.7 + 0.2;
@@ -106,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Initialize 75 particles
   for (let i = 0; i < 75; i++) {
     particles.push(new Particle());
   }
@@ -153,6 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Touch / Pointer Sparkle Trail
+  window.addEventListener("pointermove", (e) => {
+    if (Math.random() > 0.65) {
+      cursorSparkles.push(new BurstParticle(e.clientX, e.clientY));
+    }
+  });
+
   function renderCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -165,9 +176,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const bp = burstParticles[i];
       bp.update();
       bp.draw();
-      if (bp.opacity <= 0) {
-        burstParticles.splice(i, 1);
-      }
+      if (bp.opacity <= 0) burstParticles.splice(i, 1);
+    }
+
+    for (let i = cursorSparkles.length - 1; i >= 0; i--) {
+      const cs = cursorSparkles[i];
+      cs.update();
+      cs.draw();
+      if (cs.opacity <= 0) cursorSparkles.splice(i, 1);
     }
 
     requestAnimationFrame(renderCanvas);
@@ -175,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCanvas();
 
   /* ==========================================================================
-     2. AUDIO ENGINE (PLAYING "UNTIL I FOUND YOU")
+     2. AUDIO ENGINE (UNTIL I FOUND YOU)
      ========================================================================== */
   const audioBtn = document.getElementById("audio-control");
   const audioStatus = document.getElementById("audio-status");
@@ -215,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
         audioBtn.classList.add("playing");
         audioStatus.textContent = "🎵 Playing: Until I Found You";
       }).catch(err => {
-        console.log("Audio file auto-play blocked or waiting for interaction:", err);
         isAudioPlaying = true;
         audioBtn.classList.add("playing");
         audioStatus.textContent = "🎵 Playing: Until I Found You";
@@ -248,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ==========================================================================
-     4. POPULATE DOM FROM CONFIG
+     4. POPULATE DOM & 3D TILT EFFECT
      ========================================================================== */
   
   // Section: Never Perfect Lines
@@ -328,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==========================================================================
-     5. DYNAMIC MEMORY TIMELINE FILTER & RENDERING
+     5. DYNAMIC MEMORY TIMELINE FILTER & RENDERING WITH 3D TILT
      ========================================================================== */
   const timelineContainer = document.getElementById("timeline-cards-container");
   const filterBtns = document.querySelectorAll(".filter-btn");
@@ -358,6 +373,22 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="tc-message">${item.message}</div>
       `;
 
+      // 3D Card Tilt Effect on Mouse Move
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      });
+
       card.addEventListener("click", () => {
         openLightbox(item.photo, `${item.year} - ${item.title}: "${item.caption}"`);
       });
@@ -375,11 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const filter = btn.getAttribute("data-filter");
       renderTimeline(filter);
 
-      if (filter === "hard") {
-        setAtmosphere("difficult");
-      } else if (filter === "good") {
-        setAtmosphere("good");
-      }
+      if (filter === "hard") setAtmosphere("difficult");
+      else if (filter === "good") setAtmosphere("good");
     });
   });
 
@@ -393,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxClose = document.getElementById("lightbox-close");
 
   if (galleryGrid && config.gallery) {
-    config.gallery.photos.forEach((photoObj) => {
+    config.gallery.photos.forEach((photoObj, idx) => {
       const item = document.createElement("div");
       item.className = "gallery-item";
       item.innerHTML = `
@@ -403,6 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
       item.addEventListener("click", () => {
+        setActiveBgSlide(idx % bgSlideElements.length);
         openLightbox(photoObj.url, photoObj.caption);
       });
       galleryGrid.appendChild(item);
@@ -429,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ==========================================================================
-     7. SCROLL INTERSECTION OBSERVER & ATMOSPHERE ENGINE
+     7. SCROLL INTERSECTION OBSERVER & DYNAMIC BACKDROP SWITCHER
      ========================================================================== */
   const scrollProgress = document.getElementById("scroll-progress");
 
@@ -453,11 +482,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = entry.target.id;
         if (id === "chapter-upsdowns") {
           setAtmosphere("difficult");
+          setActiveBgSlide(4 % bgSlideElements.length);
         } else if (id === "came-back") {
           setAtmosphere("reconnect");
+          setActiveBgSlide(5 % bgSlideElements.length);
           triggerBurst(window.innerWidth / 2, window.innerHeight / 2);
-        } else if (id === "climax-finale" || id === "hero") {
+        } else if (id === "climax-finale") {
           setAtmosphere("good");
+          setActiveBgSlide(7 % bgSlideElements.length);
+        } else if (id === "hero") {
+          setAtmosphere("good");
+          setActiveBgSlide(1 % bgSlideElements.length);
         }
       }
     });
@@ -485,8 +520,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = e.target.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top;
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => triggerBurst(x + (Math.random() - 0.5) * 100, y + (Math.random() - 0.5) * 50), i * 150);
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => triggerBurst(x + (Math.random() - 0.5) * 120, y + (Math.random() - 0.5) * 60), i * 140);
       }
     });
   }
