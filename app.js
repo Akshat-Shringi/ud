@@ -1,6 +1,6 @@
 /**
  * DISHA & ME - SISTERHOOD EXPERIENCE INTERACTIVE ENGINE
- * Ultra-Professional Dusky Rose Quartz Atmosphere & Particle Engine
+ * Ultra-Professional Dusky Rose Quartz Atmosphere, Background Slider & Particle Engine
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,6 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const config = STORY_CONFIG;
+
+  /* ==========================================================================
+     0. BACKGROUND PHOTO AUTO-SLIDER ENGINE
+     ========================================================================== */
+  const bgSliderTrack = document.getElementById("bg-slider-track");
+  let currentSlideIndex = 0;
+  let bgSlideElements = [];
+
+  if (bgSliderTrack && config.gallery && config.gallery.photos) {
+    config.gallery.photos.forEach((photoObj, idx) => {
+      const slide = document.createElement("div");
+      slide.className = `bg-slide ${idx === 0 ? "active" : ""}`;
+      slide.innerHTML = `<img src="${photoObj.url}" alt="${photoObj.caption}">`;
+      bgSliderTrack.appendChild(slide);
+      bgSlideElements.push(slide);
+    });
+
+    // Auto-advance background slider every 6 seconds with smooth crossfade & Ken Burns effect
+    setInterval(() => {
+      if (bgSlideElements.length === 0) return;
+      bgSlideElements[currentSlideIndex].classList.remove("active");
+      currentSlideIndex = (currentSlideIndex + 1) % bgSlideElements.length;
+      bgSlideElements[currentSlideIndex].classList.add("active");
+    }, 6000);
+  }
 
   /* ==========================================================================
      1. MULTI-ATMOSPHERE DUSKY PINK CANVAS PARTICLE SYSTEM
