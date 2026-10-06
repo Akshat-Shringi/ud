@@ -7,7 +7,7 @@
 
 const STORY_CONFIG = {
   // Personal Details
-  recipientName: "Disha",
+  recipientName: "Sister",
   relationshipLabel: "Sister & Best Friend",
   yearsTogether: "10+",
   
@@ -17,7 +17,7 @@ const STORY_CONFIG = {
     sources: [
       "bg-music.mp3",
       "Until I Found You - Stephen Sanchez and Em Beihold (Lyrics)  #untilifoundyou #stephensanchez - Melomaniac.mp3",
-      "disha/bg-music.mp3"
+      "photos/bg-music.mp3"
     ]
   },
 
@@ -30,7 +30,7 @@ const STORY_CONFIG = {
 
   // 2. Hero Section
   hero: {
-    image: "disha/photo_02.jpg",
+    image: "photos/photo_02.jpg",
     badge: "Special Edition • 10+ Years of Sisterhood",
     title: "Our story wasn't perfect. That's what makes it ours.",
     subtitle: "To the sister who has seen me at my best, my worst, and every phase in between.",
@@ -81,7 +81,7 @@ const STORY_CONFIG = {
         type: "good",
         year: "2015 - 2016",
         title: "The Unstoppable Phase",
-        photo: "disha/photo_01.jpg",
+        photo: "photos/photo_01.jpg",
         caption: "Where it all began — laughing until our stomachs hurt.",
         message: "The early days where everything was a joke and we realized we shared the exact same wavelength of madness."
       },
@@ -90,7 +90,7 @@ const STORY_CONFIG = {
         type: "hard",
         year: "2017",
         title: "The First Misunderstandings",
-        photo: "disha/photo_03.jpg",
+        photo: "photos/photo_03.jpg",
         caption: "Learning how to navigate our differences.",
         message: "Not every chapter needs to be beautiful to be important. We fought and learned that being sisters means working through silence."
       },
@@ -99,7 +99,7 @@ const STORY_CONFIG = {
         type: "good",
         year: "2018 - 2019",
         title: "Late Night Secrets & Deep Talks",
-        photo: "disha/photo_04.jpg",
+        photo: "photos/photo_04.jpg",
         caption: "3 AM conversations that saved us.",
         message: "The phase where we knew every secret, every crushed dream, and every stupid hope we carried."
       },
@@ -108,7 +108,7 @@ const STORY_CONFIG = {
         type: "hard",
         year: "2020",
         title: "The Distance Phase",
-        photo: "disha/photo_05.jpg",
+        photo: "photos/photo_05.jpg",
         caption: "Life changed around us and we needed space.",
         message: "Some moments taught us how to understand each other better. Distance tested us, but it couldn't erase what we built."
       },
@@ -117,7 +117,7 @@ const STORY_CONFIG = {
         type: "good",
         year: "2021 - 2022",
         title: "Reconnection & Unfiltered Joy",
-        photo: "disha/photo_06.jpg",
+        photo: "photos/photo_06.jpg",
         caption: "Picking right back up without missing a beat.",
         message: "No matter how long we went without talking properly, one phone call made it feel like yesterday."
       },
@@ -126,7 +126,7 @@ const STORY_CONFIG = {
         type: "hard",
         year: "2023",
         title: "Growing Up & Differing Views",
-        photo: "disha/photo_07.jpg",
+        photo: "photos/photo_07.jpg",
         caption: "Different priorities, same core bond.",
         message: "We realized we were growing into different people, but remaining anchored to the same sisterhood."
       },
@@ -135,7 +135,7 @@ const STORY_CONFIG = {
         type: "good",
         year: "2024 - Present",
         title: "Forever In My Corner",
-        photo: "disha/photo_08.jpg",
+        photo: "photos/photo_08.jpg",
         caption: "The maturity of knowing we've survived everything.",
         message: "Looking back at 10+ years and realizing you are still the first person I want to call with good news."
       }
@@ -170,19 +170,19 @@ const STORY_CONFIG = {
     title: "The Unfiltered Memory Vault",
     subtitle: "13 candid snapshots of 10+ years of sisterhood.",
     photos: [
-      { url: "disha/photo_01.jpg", caption: "Pure candid chaos" },
-      { url: "disha/photo_02.jpg", caption: "The signature smile" },
-      { url: "disha/photo_03.jpg", caption: "Quiet reflective moment" },
-      { url: "disha/photo_04.jpg", caption: "Unbreakable energy" },
-      { url: "disha/photo_05.jpg", caption: "Through every phase" },
-      { url: "disha/photo_06.jpg", caption: "Making memories effortless" },
-      { url: "disha/photo_07.jpg", caption: "Golden hour talks" },
-      { url: "disha/photo_08.jpg", caption: "Sisterhood at its finest" },
-      { url: "disha/photo_09.jpg", caption: "Unapologetically us" },
-      { url: "disha/photo_10.jpg", caption: "No filter needed" },
-      { url: "disha/photo_11.jpg", caption: "10 years of laughter" },
-      { url: "disha/photo_12.jpg", caption: "Partner in crime" },
-      { url: "disha/photo_13.jpg", caption: "Here's to forever" }
+      { url: "photos/photo_01.jpg", caption: "Pure candid chaos" },
+      { url: "photos/photo_02.jpg", caption: "The signature smile" },
+      { url: "photos/photo_03.jpg", caption: "Quiet reflective moment" },
+      { url: "photos/photo_04.jpg", caption: "Unbreakable energy" },
+      { url: "photos/photo_05.jpg", caption: "Through every phase" },
+      { url: "photos/photo_06.jpg", caption: "Making memories effortless" },
+      { url: "photos/photo_07.jpg", caption: "Golden hour talks" },
+      { url: "photos/photo_08.jpg", caption: "Sisterhood at its finest" },
+      { url: "photos/photo_09.jpg", caption: "Unapologetically us" },
+      { url: "photos/photo_10.jpg", caption: "No filter needed" },
+      { url: "photos/photo_11.jpg", caption: "10 years of laughter" },
+      { url: "photos/photo_12.jpg", caption: "Partner in crime" },
+      { url: "photos/photo_13.jpg", caption: "Here's to forever" }
     ]
   },
 

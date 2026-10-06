@@ -1,5 +1,5 @@
 /**
- * DISHA & ME - SISTERHOOD EXPERIENCE INTERACTIVE ENGINE
+ * SISTERHOOD EXPERIENCE INTERACTIVE ENGINE
  * Ultra-Professional Dusky Rose Quartz Atmosphere, Background Slider & Particle Engine
  */
 
